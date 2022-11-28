@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Fitness Themed Personal Dashboard</title>
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+<style>
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&family=Poppins:wght@300;500&display=swap');
+
+:root {
+    --pxfd-color-primary: rgb(80, 128, 248);
+    --pxfd-color-success: rgb(37, 218, 231);
+    --pxfd-color-warning: rgb(255, 182, 109);
+    --pxfd-color-error: rgb(255, 129, 158);
+    --pxfd-color-white: rgb(255, 255, 255);
+    --pxfd-color-light: rgb(214, 211, 223);
+    --pxfd-color-dark: rgb(15, 14, 25);
+
+    --pxfd-color-sunny: rgb(255, 216, 178);
+    --pxfd-color-rainy: rgb(153, 182, 255);
+    --pxfd-color-snowy: rgb(255, 255, 255);
+
+    --pxfd-fontfamily-poppins: 'Poppins', sans-serif;
+    --pxfd-fontfamily-oswald: 'Oswald', sans-serif;
+    --pxfd-fontsize: 14px;
+    --pxfd-lineheight: 1.4;
+    --pxfd-fontweight-normal: 300;
+    --pxfd-fontweight-bold: 500;
+}
+
+
+/* RESET */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+
+/* PAGE SETTINGS */
+html {
+    font-size: var(--pxfd-fontsize);
+}
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://images.unsplash.com/photo-1434682881908-b43d0467b798?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3574&q=80);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: var(--pxfd-fontfamily-poppins);
+    color: var(--pxfd-color-white);
+    font-size: 1rem;
+    font-weight: var(--pxfd-fontweight-normal);
+    line-height: var(--pxfd-lineheight);
+}
+a {
+    text-decoration: none;
+}
+
+
+/* COLORS */
+.pxfd-color-primary { color: var(--pxfd-color-primary); }
+.pxfd-color-success { color: var(--pxfd-color-success); }
+.pxfd-color-warning { color: var(--pxfd-color-warning); }
+.pxfd-color-error { color: var(--pxfd-color-error); }
+.pxfd-color-white { color: var(--pxfd-color-white); }
+.pxfd-color-light { color: var(--pxfd-color-light); }
+.pxfd-color-dark { color: var(--pxfd-color-dark); }
+
+.pxfd-color-sunny { color: var(--pxfd-color-sunny); }
+.pxfd-color-rainy { color: var(--pxfd-color-rainy); }
+.pxfd-color-snowy { color: var(--pxfd-color-snowy); }
+
+
+/* TYPOGRAPHY */
+.pxfd-fontfamily-poppins { font-family: var(--pxfd-fontfamily-poppins); }
+.pxfd-fontfamily-oswald { font-family: var(--pxfd-fontfamily-oswald); }
+
+.pxfd-fontsize-08 { font-size: 0.8rem; }
+.pxfd-fontsize-09 { font-size: 0.9rem; }
+.pxfd-fontsize-10 { font-size: 1rem; }
+.pxfd-fontsize-12 { font-size: 1.2rem; }
+.pxfd-fontsize-14 { font-size: 1.4rem; }
+.pxfd-fontsize-16 { font-size: 1.6rem; }
+.pxfd-fontsize-18 { font-size: 1.8rem; }
+.pxfd-fontsize-20 { font-size: 2rem; }
+.pxfd-fontsize-24 { font-size: 2.4rem; }
+.pxfd-fontsize-28 { font-size: 2.8rem; }
+.pxfd-fontsize-32 { font-size: 3.2rem; }
+.pxfd-fontsize-38 { font-size: 3.8rem; }
+.pxfd-fontsize-44 { font-size: 4.6rem; }
+.pxfd-fontsize-50 { font-size: 5rem; }
+
+.pxfd-fontweight-normal { font-weight: var(--pxfd-fontweight-normal); }
+.pxfd-fontweight-bold { font-weight: var(--pxfd-fontweight-bold); }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--pxfd-fontweight-bold);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+
+.pxfd-text-left { text-align: left; }
+.pxfd-text-center { text-align: center; }
+.pxfd-text-right { text-align: right; }
+
+
+/* LAYOUT */
+#pxfd-appworld {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: rgba(10, 0, 30, 0.4);
+}
+
+.pxfd-glassview {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 3px 2px rgb(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+.pxfd-darkglassview {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-shadow: 0 3px 2px rgb(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.pxfd-shadowicon {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pxfd-section {
+    width: 100%;
+    margin-bottom: 4rem;
+}
+.pxfd-cardrow {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+}
+.pxfd-cardcol {
+    flex: 1 0 0%;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.pxfd-card {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    transition: transform 200ms ease;
+}
+.pxfd-card:hover {
+    transform: scale(1.03);
+}
+.pxfd-card-solid {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 4px 1px rgb(0, 0, 0, 0.3);
+}
+.pxfd-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+.pxfd-card:hover img {
+    transform: scale(1.1);
+}
+.pxfd-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 1.2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+}
+.pxfd-card-overlay ul {
+    margin-left: 1.2rem;
+}
+.pxfd-card-content {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+
+/* TOPBAR */
+#pxfd-topbar {
+    width: 100%;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pxfd-topbar-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#pxfd-dailyinfo > span {
+    margin-right: 4rem;
+}
+
+#pxfd-userinfo {
+    position: relative;
+}
+#pxfd-userinfo > span {
+    margin-left: 4rem;
+    display: flex;
+    align-items: center;
+}
+#pxfd-userinfo > span > span {
+    margin-left: 1rem;
+}
+#pxfd-user-img {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    border: 2px solid var(--pxfd-color-primary);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* MOBILE MENU */
+#pxfd-mobilemenu-toggle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 300ms ease;
+}
+#pxfd-mobilemenu-toggle * {
+    position: absolute;
+    transition: opacity 300ms ease;
+}
+#pxfd-mobilemenu-toggle *:nth-child(1) {
+    opacity: 1;
+}
+#pxfd-mobilemenu-toggle *:nth-child(2) {
+    opacity: 0;
+}
+#pxfd-mobilemenu-toggle.pxfd-active {
+    transform: rotate(360deg);
+}
+#pxfd-mobilemenu-toggle.pxfd-active *:nth-child(1) {
+    opacity: 0;
+}
+#pxfd-mobilemenu-toggle.pxfd-active *:nth-child(2) {
+    opacity: 1;
+}
+
+#pxfd-mobilemenu {
+    position: fixed;
+    width: 90%;
+    max-width: 300px;
+    top: 8rem;
+    right: -310px;
+    padding: 1rem;
+    border-radius: 5px 0 0 5px;
+    text-align: center;
+    transition: right 300ms ease;
+    display: none;
+}
+#pxfd-mobilemenu.pxfd-active {
+    right: 0px;
+}
+#pxfd-mobilemenu > span {
+    margin-bottom: 1rem;
+    display: block;
+}
+#pxfd-user-imgmobile {
+    width: 6rem;
+    height: 6rem;
+    border: 2px solid var(--pxfd-color-primary);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 960px) {
+    .pxfd-mobilehidden { display: none; }
+    #pxfd-mobilemenu { display: block; }
+    #pxfd-mobilemenu-toggle { display: flex; }
+    .pxfd-col-6x { flex: 0 0 auto; width: 33.333%; }
+}
+@media only screen and (max-width: 768px) {
+    .pxfd-col-6x { flex: 0 0 auto; width: 50%;}
+    .pxfd-col-4x { flex: 0 0 auto; width: 50%; }
+}
+    
+</style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="pxfd-appworld">
+  <div id="pxfd-topbar">
+    <div id="pxfd-dailyinfo" class="pxfd-topbar-item">
+      <span id="pxfd-textobj-clock" class="pxfd-fontsize-38 pxfd-fontfamily-oswald">08:45</span>
+      <span class="pxfd-fontsize-09 pxfd-color-light pxfd-mobilehidden">09.23.2022 Monday</span>
+    </div>
+    <div id="pxfd-userinfo" class="pxfd-topbar-item pxfd-mobilehidden">
+      <span>
+        <i class='bx bx-heart-circle pxfd-fontsize-32 pxfd-color-error'></i>
+        <span class="pxfd-color-light">56 kg<br>167 cm<br>2% fat rate</span>
+      </span>
+      <span>
+        <img id="pxfd-user-img" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=300&q=60" alt=""> Jane Doe
+      </span>
+    </div>
+    <div id="pxfd-mobilemenu-toggle" class="pxfd-glassview">
+      <i class='bx bx-menu'></i>
+      <i class='bx bx-x'></i>
+    </div>
+  </div>
+  <!-- SECTION WORKOUT -->
+  <section id="pxfd-section-workout" class="pxfd-section">
+    <h4><i class='bx bxs-bell-ring'></i> Workout...</h4>
+    <p class="pxfd-fontsize-09 pxfd-color-light">No pain, no gain!</p>
+    <div class="pxfd-cardrow">
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-run pxfd-color-success pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Cardio Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">60 minutes</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">09.23.2022 | 07:45</p>
+          </div>
+        </div>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-dumbbell pxfd-color-error pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Upper Body Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">Chest and Back Routine</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">09.23.2022 | 15:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-run pxfd-color-success pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Cardio Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">60 minutes</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">10.24.2022 | 07:45</p>
+          </div>
+        </div>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-dumbbell pxfd-color-error pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Lower Body Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">Leg Routine</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">09.24.2022 | 15:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-run pxfd-color-success pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Cardio Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">60 minutes</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">10.25.2022 | 07:45</p>
+          </div>
+        </div>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <div class="pxfd-card pxfd-glassview">
+          <div class="pxfd-card-content pxfd-text-center">
+            <i class='bx bx-dumbbell pxfd-color-error pxfd-fontsize-24 pxfd-shadowicon'></i>
+            <p class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Arms Workout</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">Arms Routine</p>
+            <p class="pxfd-color-light pxfd-fontsize-09">09.25.2022 | 15:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="pxfd-section-news" class="pxfd-section">
+    <h4><i class='bx bx-news'></i> News</h4>
+    <p class="pxfd-fontsize-09 pxfd-color-light">Something maybe you are intrested in.</p>
+    <div class="pxfd-cardrow">
+      <div class="pxfd-cardcol pxfd-col-4x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-lg pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1514820720301-4c4790309f46?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-error pxfd-fontsize-12 pxfd-fontweight-bold">2022 Championship</span>
+              <span class="pxfd-color-light">The winner is John Doe!</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-4x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-lg pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y2FyZGlvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-warning pxfd-fontsize-12 pxfd-fontweight-bold">Burn'em all</span>
+              <span class="pxfd-color-light">New cadio routine is set...</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-4x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-lg pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-success pxfd-fontsize-12 pxfd-fontweight-bold">A New Taste</span>
+              <span class="pxfd-color-light">Delicius, healty and GREEN!</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-4x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-lg pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1570829460005-c840387bb1ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGd5bXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-error pxfd-fontsize-12 pxfd-fontweight-bold">Monster Gym</span>
+              <span class="pxfd-color-light">All in, professional coaches...</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION DIET -->
+  <section id="pxfd-section-diet" class="pxfd-section">
+    <h4><i class='bx bxs-bowl-hot'></i> Daily List</h4>
+    <div class="pxfd-cardrow">
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1577594412764-f8fa57d4e5b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c21vb3RoaWV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Good Morning</span>
+              <ul class="pxfd-color-light">
+                <li>Banana-Blueberry Smoothie</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YnJlYWtmYXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">You Deserved It </span>
+              <ul class="pxfd-color-light">
+                <li>Egg</li>
+                <li>3 Strawberries</li>
+                <li>100gr Cheese</li>
+                <li>A Slice of Bread</li>
+                <li>Milk</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHBhc3RhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Energy</span>
+              <ul class="pxfd-color-light">
+                <li>Pasta with Vegetables and Meat</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1629214831802-bb2a07f9517e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvdGVpbiUyMGJhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">Protein Time</span>
+              <ul class="pxfd-color-light">
+                <li>20gr Bar</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1626790291085-19a27173773c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHN0ZWFrfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">After A Looong Day</span>
+              <ul class="pxfd-color-light">
+                <li>150gr of Meat</li>
+                <li>Steam Cooked Vegetables</li>
+                <li>A Slice of Bread</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pxfd-cardcol pxfd-col-6x">
+        <a href="#">
+          <div class="pxfd-card pxfd-card-solid">
+            <img src="https://images.unsplash.com/photo-1584587727565-a486d45d58b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="">
+            <div class="pxfd-card-overlay">
+              <span class="pxfd-color-white pxfd-fontsize-12 pxfd-fontweight-bold">The Day Ends</span>
+              <ul class="pxfd-color-light">
+                <li>Lean, Mean, Green Machine</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="pxfd-mobilemenu" class="pxfd-darkglassview">
+  <img id="pxfd-user-imgmobile" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=300&q=60" alt=""><br>
+  <span class="pxfd-fontsize-14">Jane Doe</span>
+  <span>
+    <i class='bx bx-heart-circle pxfd-fontsize-12 pxfd-color-error'></i>
+    <span class="pxfd-color-light">56 kg | 167 cm | 2% fat rate</span>
+  </span>
+  <span>
+    <i class='bx bxs-calendar pxfd-fontsize-12 pxfd-color-success'></i>
+    <span class="pxfd-color-light">09.23.2022 Monday</span>
+  </span>
+</div>
+<!-- partial -->
+  <script>
+
+const mobileMenuToggle = document.getElementById('pxfd-mobilemenu-toggle');
+const mobileMenu = document.getElementById('pxfd-mobilemenu');
+mobileMenuToggle.addEventListener('click', () => {
+  mobileMenuToggle.classList.toggle('pxfd-active');
+  if(mobileMenuToggle.classList.contains('pxfd-active'))
+    mobileMenu.classList.add('pxfd-active');
+  else
+    mobileMenu.classList.remove('pxfd-active');
+});
+  </script>
+
+</body>
+
+</html>
